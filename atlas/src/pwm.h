@@ -16,12 +16,12 @@ void mover_motor(char lado, char direcao, float velocidade)
     if (direcao == 'f')
     { // ir para frente
       analogWrite(PWMC,velocidade*corrd);
-      analogWrite(PWMD,LOW);
+      analogWrite(PWMD,0);
     }
 
     if (direcao == 't')
     { // ir para trás
-      analogWrite(PWMC,LOW);
+      analogWrite(PWMC,0);
       analogWrite(PWMD,velocidade*corrd);
     }
   }
@@ -31,12 +31,12 @@ void mover_motor(char lado, char direcao, float velocidade)
     if (direcao == 'f')
     { // ir para frente
       analogWrite(PWMA,velocidade*corre);
-      analogWrite(PWMB,LOW);
+      analogWrite(PWMB,0);
     }
 
     if (direcao == 't')
     { // ir para trás
-      analogWrite(PWMA,LOW);
+      analogWrite(PWMA,0);
       analogWrite(PWMB,velocidade*corre);
     }
   }

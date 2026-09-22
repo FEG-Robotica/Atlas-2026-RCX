@@ -47,6 +47,7 @@ int pos;
 Servo band1;
 Servo band2;
 
+
 // Variaveis Tipo Booleana
 volatile bool fora = false;
 bool abaixada = false;

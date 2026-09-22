@@ -300,16 +300,24 @@ void orbitar()
 
 void levantar() // (definir ângulo da bandeira levantada)
 {
-  band1.write(40);
-  band2.write(40);
+  for (pos=0;pos<=90;pos++)
+  {
+    band1.write(pos);
+    band2.write(pos);
+    vTaskDelay(pdMS_TO_TICKS(20));
+  }
   Serial.println("Bandeira Levantada");
   abaixada = false;
 }
 
 void abaixar() // (definir ângulo da bandeira abaixada)
 {
-  band1.write(90); 
-  band2.write(90);
+  for (pos=90;pos>=0;pos--)
+  {
+    band1.write(pos);
+    band2.write(pos);
+    vTaskDelay(pdMS_TO_TICKS(20));
+  }
   Serial.println("Bandeira Abaixada");
   abaixada = true;
 }
@@ -320,8 +328,7 @@ void EvitaLinha(void * parameter)
 {
   while (true)
   {
-    Serial.println("task EvitaLinha rodando normal");
-    fora = false;
+    //Serial.println("task EvitaLinha rodando normal");
     linha_esquerda = analogRead(SENSOR_LINHA_A);
     linha_direita = analogRead(SENSOR_LINHA_B);
 

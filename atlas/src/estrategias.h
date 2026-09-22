@@ -63,9 +63,15 @@ void STRAT2() // Estratégia(2) Órbita
       abaixar();
     }
 
-    // vTaskResume(taskEvitar);
+    //vTaskResume(taskEvitar);
 
-    if (digitalRead(SENSOR_LAT_DIR) == 1) //inimigo à direita
+    if ((digitalRead(SENSOR_MEIO_DIR) == 1) && (digitalRead(SENSOR_MEIO_ESQ) == 1))
+    {
+      mover_motor('e','f',200);
+      mover_motor('d','f',200);
+      vTaskDelay(pdMS_TO_TICKS(100));
+    }
+    else if (digitalRead(SENSOR_LAT_DIR) == 1) //inimigo à direita
     {
       mover_motor('e','f',250);
       mover_motor('d','t',250);
@@ -84,7 +90,7 @@ void STRAT2() // Estratégia(2) Órbita
       vTaskDelay(pdMS_TO_TICKS(124));
     }
     else if (digitalRead(SENSOR_FRONT_ESQ) == 1) //inimigo na diagonal esquerda
-    {
+    { 
       mover_motor('e','t',180);
       mover_motor('d','f',180);
       vTaskDelay(pdMS_TO_TICKS(124));
@@ -99,12 +105,6 @@ void STRAT2() // Estratégia(2) Órbita
     {
       mover_motor('e','f',210);
       mover_motor('d','f',250);
-      vTaskDelay(pdMS_TO_TICKS(100));
-    }
-    else if ((digitalRead(SENSOR_MEIO_DIR) == 1) && (digitalRead(SENSOR_MEIO_ESQ) == 1))
-    {
-      mover_motor('e','f',200);
-      mover_motor('d','f',200);
       vTaskDelay(pdMS_TO_TICKS(100));
     }
     else

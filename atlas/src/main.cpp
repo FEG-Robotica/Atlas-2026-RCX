@@ -123,14 +123,14 @@ void setup()
   pinMode(LEDPIN, OUTPUT);
 
   // led
-  ledcSetup(0, 5000, 10);
+  /* ledcSetup(0, 5000, 10);
   ledcAttachPin(PWMA, 0);
   ledcSetup(1, 5000, 10);
   ledcAttachPin(PWMB, 1);
   ledcSetup(2, 5000, 10);
   ledcAttachPin(PWMC, 2);
   ledcSetup(3, 5000, 10);
-  ledcAttachPin(PWMD, 3);
+  ledcAttachPin(PWMD, 3); */
 
   // Servo
   band1.attach(39);
@@ -180,7 +180,7 @@ void setup()
     &taskEvitar,      //handle da tarefa
     0);               //núcleo onde a tarefa vai ser usada
 
-  // vTaskSuspend(taskEvitar);
+  //vTaskSuspend(taskEvitar);
 }
 
 // Atualizar leitura dos sensores de linha e distancia
@@ -310,10 +310,31 @@ void loop()
 
   // * ESTRATÉGIAS *
 
-  analogWrite(PWMA, 1023);
+  /*analogWrite(PWMA, 1023);
   analogWrite(PWMB, 0);
   analogWrite(PWMC, 1023);
   analogWrite(PWMD, 0);
+  vTaskDelay(pdMS_TO_TICKS(1000));
+  analogWrite(PWMA, 900);
+  analogWrite(PWMB, 0);
+  analogWrite(PWMC, 900);
+  analogWrite(PWMD, 0);
+  vTaskDelay(pdMS_TO_TICKS(1000));           //é pra teste!
+  analogWrite(PWMA, 800);
+  analogWrite(PWMB, 0);
+  analogWrite(PWMC, 800);
+  analogWrite(PWMD, 0);
+  vTaskDelay(pdMS_TO_TICKS(1000));
+  analogWrite(PWMA, 700);
+  analogWrite(PWMB, 0);
+  analogWrite(PWMC, 700);
+  analogWrite(PWMD, 0);
+  vTaskDelay(pdMS_TO_TICKS(1000));*/
+
+  /*abaixar();
+  vTaskDelay(pdMS_TO_TICKS(200));
+  levantar();
+  vTaskDelay(pdMS_TO_TICKS(200));*/
 
   // STRAT 1
   if (comando == "m")
@@ -348,7 +369,10 @@ void loop()
   // STRAT 5
   if (comando == "s2")
   {
+    if (!fora)
+    {
     STRAT2();
+    }
   }
 
 }
