@@ -181,6 +181,11 @@ void setup()
     0);               //núcleo onde a tarefa vai ser usada
 
   //vTaskSuspend(taskEvitar);
+
+  analogWrite(PWMA,0);
+  analogWrite(PWMB,0);
+  analogWrite(PWMC,0);
+  analogWrite(PWMD,0);
 }
 
 // Atualizar leitura dos sensores de linha e distancia
@@ -310,31 +315,34 @@ void loop()
 
   // * ESTRATÉGIAS *
 
-  /*analogWrite(PWMA, 1023);
+  // analogWrite(PWMA, 1023);
+  // analogWrite(PWMB, 0);
+  // analogWrite(PWMC, 1023);
+  // analogWrite(PWMD, 0);
+  // vTaskDelay(pdMS_TO_TICKS(1000));
+  analogWrite(PWMA, 400);
   analogWrite(PWMB, 0);
-  analogWrite(PWMC, 1023);
+  analogWrite(PWMC, 400);
   analogWrite(PWMD, 0);
   vTaskDelay(pdMS_TO_TICKS(1000));
-  analogWrite(PWMA, 900);
-  analogWrite(PWMB, 0);
-  analogWrite(PWMC, 900);
-  analogWrite(PWMD, 0);
-  vTaskDelay(pdMS_TO_TICKS(1000));           //é pra teste!
-  analogWrite(PWMA, 800);
-  analogWrite(PWMB, 0);
-  analogWrite(PWMC, 800);
-  analogWrite(PWMD, 0);
-  vTaskDelay(pdMS_TO_TICKS(1000));
-  analogWrite(PWMA, 700);
-  analogWrite(PWMB, 0);
-  analogWrite(PWMC, 700);
-  analogWrite(PWMD, 0);
-  vTaskDelay(pdMS_TO_TICKS(1000));*/
+  // analogWrite(PWMA, 800);
+  // analogWrite(PWMB, 0);
+  // analogWrite(PWMC, 800);
+  // analogWrite(PWMD, 0);
+  // vTaskDelay(pdMS_TO_TICKS(1000));
+  // analogWrite(PWMA, 700);
+  // analogWrite(PWMB, 0);
+  // analogWrite(PWMC, 700);
+  // analogWrite(PWMD, 0);
+  // vTaskDelay(pdMS_TO_TICKS(1000));
 
-  /*abaixar();
+  
+  //teste de bandeira
+  abaixar();
   vTaskDelay(pdMS_TO_TICKS(200));
   levantar();
-  vTaskDelay(pdMS_TO_TICKS(200));*/
+  vTaskDelay(pdMS_TO_TICKS(200));
+  
 
   // STRAT 1
   if (comando == "m")
