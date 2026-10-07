@@ -303,7 +303,7 @@ void levantar() // (definir ângulo da bandeira levantada)
   for (pos=0;pos<=90;pos++)
   {
     band1.write(pos);
-    band2.write(pos);
+    band2.write(-pos);
     vTaskDelay(pdMS_TO_TICKS(20));
   }
   Serial.println("Bandeira Levantada");
@@ -315,7 +315,7 @@ void abaixar() // (definir ângulo da bandeira abaixada)
   for (pos=90;pos>=0;pos--)
   {
     band1.write(pos);
-    band2.write(pos);
+    band2.write(-pos);
     vTaskDelay(pdMS_TO_TICKS(20));
   }
   Serial.println("Bandeira Abaixada");
@@ -332,7 +332,7 @@ void EvitaLinha(void * parameter)
     linha_esquerda = analogRead(SENSOR_LINHA_A);
     linha_direita = analogRead(SENSOR_LINHA_B);
 
-    if ((linha_esquerda > limite) || (linha_direita > limite))
+    if ((linha_esquerda < limite) || (linha_direita < limite))
     {
       fora = true;
       //tparar() só testando pra saber se precisa

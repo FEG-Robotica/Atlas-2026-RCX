@@ -133,10 +133,10 @@ void setup()
   ledcAttachPin(PWMD, 3); */
 
   // Servo
-  band1.attach(39);
-  band1.write(40);
-  band2.attach(40);
-  band2.write(40);
+  band1.attach(bnd1);
+  band1.write(0);
+  band2.attach(bnd2);
+  band2.write(0);
 
   Serial.begin(9600);
 
@@ -212,6 +212,7 @@ void loop()
 
   if (deviceConnected)
   {
+    Serial.print(digitalRead(SENSOR_LINHA_A));
     envia_sensores_distancia();
     envia_sensores_linha();
     delay(5);
@@ -294,10 +295,14 @@ void loop()
   {
     Serial.print("E: ");
     Serial.print(digitalRead(SENSOR_LAT_ESQ));
+    Serial.print("DE: ");
+    Serial.println(digitalRead(SENSOR_FRONT_ESQ));
     Serial.print("FE: ");
-    Serial.print(digitalRead(SENSOR_FRONT_ESQ));
+    Serial.println(digitalRead(SENSOR_MEIO_ESQ));
     Serial.print("FD: ");
-    Serial.print(digitalRead(SENSOR_FRONT_DIR));
+    Serial.println(digitalRead(SENSOR_MEIO_DIR));
+    Serial.print("DD: ");
+    Serial.println(digitalRead(SENSOR_FRONT_DIR));
     Serial.print("D: ");
     Serial.println(digitalRead(SENSOR_LAT_DIR));
     delay(1000);
@@ -320,11 +325,11 @@ void loop()
   // analogWrite(PWMC, 1023);
   // analogWrite(PWMD, 0);
   // vTaskDelay(pdMS_TO_TICKS(1000));
-  analogWrite(PWMA, 400);
-  analogWrite(PWMB, 0);
-  analogWrite(PWMC, 400);
-  analogWrite(PWMD, 0);
-  vTaskDelay(pdMS_TO_TICKS(1000));
+  // analogWrite(PWMB, 1023);
+  // analogWrite(PWMA, 0);
+  // analogWrite(PWMD, 1023);
+  // analogWrite(PWMC, 0);
+  // vTaskDelay(pdMS_TO_TICKS(1000));
   // analogWrite(PWMA, 800);
   // analogWrite(PWMB, 0);
   // analogWrite(PWMC, 800);

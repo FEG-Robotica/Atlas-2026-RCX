@@ -19,8 +19,8 @@
 #define PWMD 35 // entrada motor B IN4_B
 
 // Sensores de Linha
-#define SENSOR_LINHA_A 13 // SLA 36 é o correto E
-#define SENSOR_LINHA_B 14 // SLB 39 é o correto D
+#define SENSOR_LINHA_A 13 // linha esquerda
+#define SENSOR_LINHA_B 14 // linha direita
 
 // Modulo Start
 #define MODULO_START 21 // SIN8
@@ -46,14 +46,16 @@ int pos;
 // Servo
 Servo band1;
 Servo band2;
+int bnd1 = 39;
+int bnd2 = 40;
 
 
 // Variaveis Tipo Booleana
 volatile bool fora = false;
 bool abaixada = false;
 
-// Limite da Arena (a calibrar)
-int limite = 1500;
+// Limite da Arena branco < 1000, preto > 1000
+int limite = 1000;
 
 // Chamada de funções
 void leituraSensoresDistancia();
