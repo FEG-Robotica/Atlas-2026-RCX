@@ -180,7 +180,7 @@ void setup()
     &taskEvitar,      //handle da tarefa
     0);               //núcleo onde a tarefa vai ser usada
 
-  //vTaskSuspend(taskEvitar);
+  vTaskSuspend(taskEvitar);
 
   analogWrite(PWMA,0);
   analogWrite(PWMB,0);
@@ -294,7 +294,7 @@ void loop()
   if (comando == "printdistancia")
   {
     Serial.print("E: ");
-    Serial.print(digitalRead(SENSOR_LAT_ESQ));
+    Serial.println(digitalRead(SENSOR_LAT_ESQ));
     Serial.print("DE: ");
     Serial.println(digitalRead(SENSOR_FRONT_ESQ));
     Serial.print("FE: ");
@@ -312,7 +312,6 @@ void loop()
   {
     Serial.print("SLE: ");
     Serial.println(analogRead(SENSOR_LINHA_A));
-    delay(1000);
     Serial.print("SLD: ");
     Serial.println(analogRead(SENSOR_LINHA_B));
     delay(1000);
@@ -320,34 +319,39 @@ void loop()
 
   // * ESTRATÉGIAS *
 
-  // analogWrite(PWMA, 1023);
-  // analogWrite(PWMB, 0);
-  // analogWrite(PWMC, 1023);
-  // analogWrite(PWMD, 0);
-  // vTaskDelay(pdMS_TO_TICKS(1000));
   // analogWrite(PWMB, 1023);
   // analogWrite(PWMA, 0);
   // analogWrite(PWMD, 1023);
   // analogWrite(PWMC, 0);
   // vTaskDelay(pdMS_TO_TICKS(1000));
-  // analogWrite(PWMA, 800);
-  // analogWrite(PWMB, 0);
-  // analogWrite(PWMC, 800);
-  // analogWrite(PWMD, 0);
-  // vTaskDelay(pdMS_TO_TICKS(1000));
-  // analogWrite(PWMA, 700);
-  // analogWrite(PWMB, 0);
-  // analogWrite(PWMC, 700);
-  // analogWrite(PWMD, 0);
-  // vTaskDelay(pdMS_TO_TICKS(1000));
 
+  // mover_motor('d','f',1023);
+  // mover_motor('e','f',1023);
+  // vTaskDelay(pdMS_TO_TICKS(1000));
   
   //teste de bandeira
-  abaixar();
-  vTaskDelay(pdMS_TO_TICKS(200));
-  levantar();
-  vTaskDelay(pdMS_TO_TICKS(200));
+  // abaixar();
+  // vTaskDelay(pdMS_TO_TICKS(200));
+  // levantar();
+  // vTaskDelay(pdMS_TO_TICKS(200));
   
+  // Serial.print("E: ");
+  // Serial.println(digitalRead(SENSOR_LAT_ESQ));
+  // Serial.print("DE: ");
+  // Serial.println(digitalRead(SENSOR_FRONT_ESQ));
+  // Serial.print("FE: ");
+  // Serial.println(digitalRead(SENSOR_MEIO_ESQ));
+  // Serial.print("FD: ");
+  // Serial.println(digitalRead(SENSOR_MEIO_DIR));
+  // Serial.print("DD: ");
+  // Serial.println(digitalRead(SENSOR_FRONT_DIR));
+  // Serial.print("D: ");
+  // Serial.println(digitalRead(SENSOR_LAT_DIR));
+  // Serial.print("Linha E: ");
+  // Serial.println(analogRead(SENSOR_LINHA_A));
+  // Serial.print("Linha D: ");
+  // Serial.println(analogRead(SENSOR_LINHA_B));
+  // delay(1500);
 
   // STRAT 1
   if (comando == "m")
@@ -382,10 +386,7 @@ void loop()
   // STRAT 5
   if (comando == "s2")
   {
-    if (!fora)
-    {
-    STRAT2();
-    }
+  STRAT2();
   }
 
 }
