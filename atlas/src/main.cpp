@@ -132,6 +132,9 @@ void setup()
   ledcSetup(3, 5000, 10);
   ledcAttachPin(PWMD, 3); */
 
+  //resolução pwm (0-1023)
+  analogWriteResolution(10);
+
   // Servo
   band1.attach(bnd1);
   band1.write(0);
@@ -182,10 +185,10 @@ void setup()
 
   vTaskSuspend(taskEvitar);
 
-  analogWrite(PWMA,0);
-  analogWrite(PWMB,0);
-  analogWrite(PWMC,0);
-  analogWrite(PWMD,0);
+  // analogWrite(PWMA,0);
+  // analogWrite(PWMB,0);
+  // analogWrite(PWMC,0);
+  // analogWrite(PWMD,0);
 }
 
 // Atualizar leitura dos sensores de linha e distancia
