@@ -233,13 +233,11 @@ void loop()
     oldDeviceConnected = deviceConnected;
   }
 
-  /*
   while (digitalRead(MODULO_START) == 0)
   {
     parar();
     Serial.println(digitalRead(MODULO_START));
-  }
-  */
+  }  
 
   if (comando == "led")
   {
@@ -321,7 +319,7 @@ void loop()
   }
 
   // * ESTRATÉGIAS *
-
+  
   // analogWrite(PWMB, 1023);
   // analogWrite(PWMA, 0);
   // analogWrite(PWMD, 1023);
@@ -338,6 +336,7 @@ void loop()
   // levantar();
   // vTaskDelay(pdMS_TO_TICKS(200));
   
+  //teste de sensores
   // Serial.print("E: ");
   // Serial.println(digitalRead(SENSOR_LAT_ESQ));
   // Serial.print("DE: ");

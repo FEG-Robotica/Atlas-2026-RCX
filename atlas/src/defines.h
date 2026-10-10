@@ -23,10 +23,10 @@
 #define SENSOR_LINHA_B 14 // linha direita
 
 // Modulo Start
-#define MODULO_START 21 // SIN8
+#define MODULO_START 2 // SIN8
 
 // Led
-#define LEDPIN 2
+#define LEDPIN 21
 
 // Bluetooth
 #define SERVICE_UUID "09e15beb-7685-4c74-babc-c1be7c182b9e"
