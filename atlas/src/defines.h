@@ -13,10 +13,10 @@
 #define SENSOR_LAT_ESQ 16   //_SDF
 
 // Pwm
-#define PWMA 37 // entrada motor A IN1_A
-#define PWMB 38 // entrada motor A IN2_A
-#define PWMC 36 // entrada motor B IN3_B
-#define PWMD 35 // entrada motor B IN4_B
+#define PWMA 41 // entrada motor A IN1_A
+#define PWMB 42 // entrada motor A IN2_A
+#define PWMC 48 // entrada motor B IN3_B
+#define PWMD 47 // entrada motor B IN4_B
 
 // Sensores de Linha
 #define SENSOR_LINHA_A 13 // linha esquerda
