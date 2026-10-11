@@ -13,20 +13,21 @@
 #define SENSOR_LAT_ESQ 16   //_SDF
 
 // Pwm
-#define PWMA 41 // entrada motor A IN1_A
-#define PWMB 42 // entrada motor A IN2_A
-#define PWMC 48 // entrada motor B IN3_B
-#define PWMD 47 // entrada motor B IN4_B
+#define PWMA 37//47 // entrada motor A IN1_A (frente funfa)
+#define PWMB 38//48 // entrada motor A IN2_A (traz - funfa)
+#define PWMC 36//41 // entrada motor B IN3_B (trz- n funfa) direita
+#define PWMD 35//42 // entrada motor B IN4_B traz (frente - funfa) direita
 
 // Sensores de Linha
 #define SENSOR_LINHA_A 13 // linha esquerda
 #define SENSOR_LINHA_B 14 // linha direita
 
 // Modulo Start
-#define MODULO_START 2 // SIN8
+#define MODULO_START 2
+ // SIN8
 
 // Led
-#define LEDPIN 21
+//#define LEDPIN 2
 
 // Bluetooth
 #define SERVICE_UUID "09e15beb-7685-4c74-babc-c1be7c182b9e"
@@ -35,6 +36,8 @@
 // Variaveis Tipo Inteiro e Iguais á Zero
 volatile int linha_direita = 0;
 volatile int linha_esquerda = 0;
+int distancia_frontal_direita_reta = 0;
+int distancia_lateral_direita_reta = 0;
 int distancia_lateral_esquerdo = 0;
 int distancia_frontal_esquerdo = 0;
 int distancia_frontal_direita = 0;

@@ -82,9 +82,13 @@ void envia_sensores_distancia()
   leituraSensoresDistancia();
   std::string sensores = " E:";
   sensores.append(std::to_string(distancia_lateral_esquerdo));
-  sensores.append(" FE:");
+  sensores.append(" DE:");
   sensores.append(std::to_string(distancia_frontal_esquerdo));
+  sensores.append(" FE:");
+  sensores.append(std::to_string(distancia_frontal_direita_reta));
   sensores.append(" FD:");
+  sensores.append(std::to_string(distancia_lateral_direita_reta));
+  sensores.append(" DD:");
   sensores.append(std::to_string(distancia_frontal_direita));
   sensores.append(" D:");
   sensores.append(std::to_string(distancia_lateral_direita));
@@ -120,7 +124,7 @@ void setup()
   pinMode(PWMB, OUTPUT);                     // entrada motor A
   pinMode(PWMC, OUTPUT);                     // entrada motor B
   pinMode(PWMD, OUTPUT);                     // entrada motor B
-  pinMode(LEDPIN, OUTPUT);
+  //pinMode(LEDPIN, OUTPUT);
 
   // led
   /* ledcSetup(0, 5000, 10);
@@ -199,10 +203,12 @@ void leituraSensoresLinha()
 }
 void leituraSensoresDistancia()
 {
+  distancia_frontal_direita_reta = digitalRead(SENSOR_MEIO_ESQ);
   distancia_lateral_esquerdo = digitalRead(SENSOR_LAT_ESQ);
   distancia_frontal_esquerdo = digitalRead(SENSOR_FRONT_ESQ);
   distancia_frontal_direita = digitalRead(SENSOR_FRONT_DIR);
   distancia_lateral_direita = digitalRead(SENSOR_LAT_DIR);
+  distancia_lateral_direita_reta = digitalRead(SENSOR_MEIO_DIR);
 }
 
 #include "pwm.h"
@@ -211,7 +217,10 @@ void leituraSensoresDistancia()
 void loop()
 {
 
+  Serial.print("MODULO START: ");
   Serial.println(digitalRead(MODULO_START));
+  Serial.print("---------\n\n");
+  
 
   if (deviceConnected)
   {
@@ -233,11 +242,39 @@ void loop()
     oldDeviceConnected = deviceConnected;
   }
 
+  /*
   while (digitalRead(MODULO_START) == 0)
   {
     parar();
     Serial.println(digitalRead(MODULO_START));
-  }  
+  }
+  */
+
+  if (comando == "tmod")
+{
+  if (digitalRead(MODULO_START) == 1){
+    frente();
+    Serial.print("\n--------\nEle esta indo pra frente\n--------");
+  }
+  else{
+    parar();
+    Serial.print("\n--------\nEle esta paradinho\n--------");
+
+  }
+}
+
+  if(comando == "tl"){
+    TestarLinha();
+  }
+
+
+  if(comando == "svb"){
+    abaixar();
+  }
+    if(comando == "sva"){
+    levantar();
+  }
+
 
   if (comando == "led")
   {
@@ -319,7 +356,7 @@ void loop()
   }
 
   // * ESTRATÉGIAS *
-  
+
   // analogWrite(PWMB, 1023);
   // analogWrite(PWMA, 0);
   // analogWrite(PWMD, 1023);
@@ -336,7 +373,6 @@ void loop()
   // levantar();
   // vTaskDelay(pdMS_TO_TICKS(200));
   
-  //teste de sensores
   // Serial.print("E: ");
   // Serial.println(digitalRead(SENSOR_LAT_ESQ));
   // Serial.print("DE: ");
@@ -373,6 +409,13 @@ void loop()
     Busca();
   }
 
+  //STRAT 4
+  if(comando == "tr")
+  {
+    truquezin();
+    
+  }
+
   // STRAT 6
   if (comando == "a")
   {
@@ -389,6 +432,10 @@ void loop()
   if (comando == "s2")
   {
   STRAT2();
+  }
+  if (comando == "s3")
+  {
+    STRAT3();
   }
 
 }

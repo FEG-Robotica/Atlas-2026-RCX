@@ -58,25 +58,25 @@ void testar_PWM()
 
 void frente()
 {
-  mover_motor('e', 'f', 500);
-  mover_motor('d', 'f', 500);
+  mover_motor('e', 'f', 1023);
+  mover_motor('d', 'f', 1023);
 }
 void tras()
 {
-  mover_motor('e', 't', 400);
-  mover_motor('d', 't', 400);
+  mover_motor('e', 't', 1023);
+  mover_motor('d', 't', 1023);
 }
 
 void direita()
 {
-  mover_motor('e', 'f', 400);
-  mover_motor('d', 'f', 200);
+  mover_motor('e', 'f', 800);
+  mover_motor('d', 'f', 400);
 }
 
 void esquerda()
 {
-  mover_motor('e', 'f', 200);
-  mover_motor('d', 'f', 400);
+  mover_motor('e', 'f', 400);
+  mover_motor('d', 'f', 800);
 }
 
 void parar()
@@ -107,8 +107,8 @@ void tparar()
 
 void girar_eixo()
 {
-  mover_motor('e', 'f', 300);
-  mover_motor('d', 't', 300);
+  mover_motor('e', 'f', 600);
+  mover_motor('d', 't', 600);
 }
 
 void girar_circulo()

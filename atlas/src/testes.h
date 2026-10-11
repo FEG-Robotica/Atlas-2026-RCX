@@ -7,11 +7,12 @@
 
 void piscar_led()
 {
-  digitalWrite(LEDPIN, HIGH);
-  delay(500);
-  digitalWrite(LEDPIN, LOW);
+  //digitalWrite(LEDPIN, HIGH);
+  //delay(500);
+  //digitalWrite(LEDPIN, LOW);
   delay(500);
 }
+
 
 void LerLinhaDigital()
 {
@@ -87,26 +88,29 @@ void Busca()
     }
     else if ((sensorLatEsq == 1) && (sensorFrontEsq == 0) && (sensorFrontDir == 0) && (sensorLatDir == 0))
     {
-      mover_motor('e', 't', 100);
-      mover_motor('d', 'f', 150);
-      delay(50);
-    }
-    else if ((sensorLatEsq == 0) && (sensorFrontEsq == 1) && (sensorFrontDir == 0) && (sensorLatDir == 0))
-    {
-      mover_motor('e', 'f', 100);
-      mover_motor('d', 'f', 150);
+      mover_motor('e', 't', 300);
+      mover_motor('d', 'f', 450);
       delay(50);
     }
     else if ((sensorLatEsq == 0) && (sensorFrontEsq == 0) && (sensorFrontDir == 0) && (sensorLatDir == 1))
     {
-      mover_motor('e', 'f', 150);
-      mover_motor('d', 't', 100);
+      mover_motor('e', 'f', 450);
+      mover_motor('d', 't', 300);
       delay(50);
     }
+    
+    
+    else if ((sensorLatEsq == 0) && (sensorFrontEsq == 1) && (sensorFrontDir == 0) && (sensorLatDir == 0))
+    {
+      mover_motor('e', 'f', 300);
+      mover_motor('d', 'f', 450);
+      delay(50);
+    }
+      
     else if ((sensorLatEsq == 0) && (sensorFrontEsq == 0) && (sensorFrontDir == 1) && (sensorLatDir == 0))
     {
-      mover_motor('e', 'f', 150);
-      mover_motor('d', 'f', 100);
+      mover_motor('e', 'f', 450);
+      mover_motor('d', 'f', 300);
       delay(50);
     }
     else if ((sensorFrontEsq == 1) && (sensorFrontDir == 1))
@@ -114,12 +118,21 @@ void Busca()
       frente();
     }
   }
+  else{
+    parar();
+  }
 }
 
 void Missil()
 {
-  mover_motor('e', 'f', 1023);
-  mover_motor('d', 'f', 1023);
+  if (digitalRead(MODULO_START) == 1)
+  {
+    mover_motor('e', 'f', 1023);
+    mover_motor('d', 'f', 1023);
+  }
+  else{
+    parar();
+  }
 }
 
 void Linha()
@@ -252,37 +265,35 @@ void TestarLinha()
   if (digitalRead(MODULO_START) == 1)
   {
     leituraSensoresLinha();
-    /*if ((linha_direita == 1) && (linha_esquerda == 1))
+    if ((linha_direita < 2500) && (linha_esquerda < 2500))
     {
-      mover_motor('e', 'f', 300);
-      mover_motor('d', 'f', 300);
-    }*/
-    if ((linha_direita == 0) && (linha_esquerda == 1))
+      
+      mover_motor('e', 't', 750);
+      mover_motor('d', 't', 750);
+      delay(750);
+      mover_motor('e', 'f', 500);
+      mover_motor('d', 't', 200);
+      delay(500);
+    
+    }
+    else if ((linha_direita >2500) && (linha_esquerda <2500))
     {
-      mover_motor('d', 't', 400);
-      mover_motor('e', 't', 400);
-      delay(300);
-      mover_motor('d', 't', 400);
+      mover_motor('d', 't', 300);
+      mover_motor('e', 't', 700);
+      delay(500);
+    }
+    else if ((linha_direita <2500) && (linha_esquerda > 2500))
+    {
+      mover_motor('d', 't', 700);
+      mover_motor('e', 't', 300);
+      delay(500);
+    }
+    else if ((linha_direita > 2500) && (linha_esquerda > 2500))
+    {
+      /*
+      mover_motor('d', 'f', 500);
       mover_motor('e', 'f', 400);
-      delay(300);
-    }
-    else if ((linha_direita == 1) && (linha_esquerda == 0))
-    {
-      mover_motor('d', 't', 400);
-      mover_motor('e', 't', 400);
-      delay(300);
-      mover_motor('d', 'f', 500);
-      mover_motor('e', 't', 400);
-      delay(300);
-    }
-    else if ((linha_direita == 0) && (linha_esquerda == 0))
-    {
-      mover_motor('d', 't', 400);
-      mover_motor('e', 't', 400);
-      delay(300);
-      mover_motor('d', 'f', 500);
-      mover_motor('e', 't', 400);
-      delay(300);
+      */
     }
   }
   else
@@ -353,5 +364,8 @@ void EvitaLinha(void * parameter)
     vTaskDelay(50 / portTICK_PERIOD_MS);
   }
 }
+
+
+
 
 #endif

@@ -11,46 +11,49 @@ void STRAT1() // Estratégia(1) de Busca e Linha
   if (digitalRead(MODULO_START) == 1)
   {
     int sensorLatEsq = digitalRead(SENSOR_LAT_ESQ);
-    int sensorFrontEsq = digitalRead(SENSOR_FRONT_ESQ);
-    int sensorFrontDir = digitalRead(SENSOR_FRONT_DIR);
+    int sensorDiaEsq = digitalRead(SENSOR_FRONT_ESQ);
+    int sensorFrontEsq = digitalRead(SENSOR_MEIO_ESQ);
+    int sensorFrontDir = digitalRead(SENSOR_MEIO_DIR);
+    int sensorDiaDir = digitalRead(SENSOR_FRONT_DIR);
     int sensorLatDir = digitalRead(SENSOR_LAT_DIR);
 
     TestarLinha();
 
-    if ((sensorLatEsq == 0) && (sensorFrontEsq == 0) && (sensorFrontDir == 0) && (sensorLatDir == 0))
+    if ((sensorFrontEsq == 1) || (sensorFrontDir == 1))
     {
-      mover_motor('e', 'f', 200);
-      mover_motor('d', 'f', 200);
-      delay(50);
+      frente();
     }
-    else if ((sensorLatEsq == 1) && (sensorFrontEsq == 0) && (sensorFrontDir == 0) && (sensorLatDir == 0))
+    else if ((sensorLatEsq == 0) && (sensorFrontEsq == 0) && (sensorFrontDir == 0) && (sensorLatDir == 0))
     {
-      mover_motor('e', 't', 100);
-      mover_motor('d', 'f', 150);
+      girar_eixo();
+    }
+    else if (((sensorLatEsq == 1) || (sensorDiaEsq == 1)) && (sensorFrontEsq == 0) && (sensorFrontDir == 0) && (sensorLatDir == 0))
+    {
+      mover_motor('e', 't', 300);
+      mover_motor('d', 'f', 1023);
       delay(50);
     }
     else if ((sensorLatEsq == 0) && (sensorFrontEsq == 1) && (sensorFrontDir == 0) && (sensorLatDir == 0))
     {
-      mover_motor('e', 'f', 100);
-      mover_motor('d', 'f', 150);
+      mover_motor('e', 'f', 300);
+      mover_motor('d', 'f', 1023);
       delay(50);
     }
-    else if ((sensorLatEsq == 0) && (sensorFrontEsq == 0) && (sensorFrontDir == 0) && (sensorLatDir == 1))
+    else if ((sensorLatEsq == 0) && (sensorFrontEsq == 0) && (sensorFrontDir == 0) && ((sensorLatDir == 1) || (sensorDiaDir == 1)))
     {
-      mover_motor('e', 'f', 150);
-      mover_motor('d', 't', 100);
+      mover_motor('d', 'f', 1023);
+      mover_motor('e', 't', 300);
       delay(50);
     }
     else if ((sensorLatEsq == 0) && (sensorFrontEsq == 0) && (sensorFrontDir == 1) && (sensorLatDir == 0))
     {
-      mover_motor('e', 'f', 150);
-      mover_motor('d', 'f', 100);
+      mover_motor('e', 'f', 1023);
+      mover_motor('d', 'f', 300);
       delay(50);
     }
-    else if ((sensorFrontEsq == 1) && (sensorFrontDir == 1))
-    {
-      frente();
-    }
+  }
+  else{
+    parar();
   }
 }
 
@@ -112,5 +115,73 @@ void STRAT2() // Estratégia(2) Órbita
       orbitar();
     }
   }
+  else{
+    parar();
+  }
 }
+
+void STRAT3()
+{
+  if (digitalRead(MODULO_START) != 1)
+  {
+    parar();
+    return;
+  }
+
+  int latE  = digitalRead(SENSOR_LAT_ESQ);
+  int diaE  = digitalRead(SENSOR_FRONT_ESQ);
+  int meioE = digitalRead(SENSOR_MEIO_ESQ);
+  int meioD = digitalRead(SENSOR_MEIO_DIR);
+  int diaD  = digitalRead(SENSOR_FRONT_DIR);
+  int latD  = digitalRead(SENSOR_LAT_DIR);
+
+  TestarLinha();
+
+  if (meioE && meioD)            // inimigo de frente: ataca
+  {
+    frente();
+  }
+  else if (meioE)                // frente-esquerda
+  {
+    mover_motor('e', 'f', 200);
+    mover_motor('d', 'f', 500);
+  }
+  else if (meioD)                // frente-direita
+  {
+    mover_motor('e', 'f', 500);
+    mover_motor('d', 'f', 200);
+  }
+  else if (latE || diaE)         // esquerda
+  {
+    mover_motor('e', 't', 200);
+    mover_motor('d', 'f', 500);
+  }
+  else if (latD || diaD)         // direita
+  {
+    mover_motor('e', 'f', 500);
+    mover_motor('d', 't', 200);
+  }
+  else                           // não vê ninguém: procura
+  {
+    girar_eixo();
+  }
+}
+
+void truquezin(){ //Estratégia(3) Enganha Míssil
+
+  if (digitalRead(MODULO_START) == 1)
+  {
+    TestarLinha();
+    //abaixar();
+    mover_motor('e', 'f', 500);
+    mover_motor('d', 'f', 300);
+    comando = "s1";
+  }
+  else{
+    parar();
+  }
+
+}
+
+
 #endif
